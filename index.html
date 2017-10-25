@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>ScanPlan | Launching Soon</title>
+      <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+
+      <!-- Favicon ================== -->
+      <!-- Standard -->
+      <link rel="shortcut icon" href="img/favicon-black.png">
+      <!-- Retina iPad Touch Icon-->
+      <link rel="apple-touch-icon" sizes="144x144" href="img/favicon-black.png">
+      <!-- Retina iPhone Touch Icon-->
+      <link rel="apple-touch-icon" sizes="114x114" href="img/favicon-black.png">
+      <!-- Standard iPad Touch Icon-->
+      <link rel="apple-touch-icon" sizes="72x72" href="img/favicon-black.png">
+      <!-- Standard iPhone Touch Icon-->
+      <link rel="apple-touch-icon" sizes="57x57" href="img/favicon-black.png">
+
+      <!--  Resources style ================== -->
+      <link href="css/eerie.css" rel="stylesheet" type="text/css" media="all"/>
+      <link href="css/custom.css" rel="stylesheet" type="text/css" media="all"/>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"  rel="stylesheet" type="text/css" >
+      <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+      <script type="text/javascript">
+        (function(){
+           emailjs.init("user_Q13XoJI3Nu3MNMysBcq9h");
+        })();
+     </script>
+
+    </head>
+    <body>
+      <section id="parent" class="animsition">
+
+        <div id="leftSide" class="gradient">
+          <canvas id="canvas" class="bit"></canvas>
+
+            <div id="home" class="center  text- col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+
+              <div class="h-content top-15">
+                <!-- Your logo -->
+                <img src="img/scanplan-2.png" alt="logo" class="quick fadeIn relative mb30 main-logo" />
+
+                <h1 class="mid animated fadeInUp mb30 medium-heading fw700">The digital bridge between expo and vendor</h1>
+
+                <div class="mt40 slow animated fadeInUp">
+                  <div id="subscribe" class="fadeup vertical compress">
+
+                      <div
+                      id="subscribe-form" class="vertical-form compressed-form">
+                        <input type="email" name="EMAIL" class="input-email round mr10" placeholder="Email Address" id="email">
+                        <a onClick="sendMessage()"><button type="submit" name="subscribe" class="submit btn-solid round input-submit"><i class="ion-android-send"></i></button></a>
+
+                      </div>
+                    </div>
+                </div>
+              </div>
+
+              <div class="social_tab fixed quick fadeIn">
+                <p class="notoSerif">Love at first expo.</p>
+                <ul class="social_icons">
+                  <li><a href="app.html#"><i class="ti-facebook "></i></a></li>
+                  <li><a href="app.html#"><i class="ti-twitter-alt "></i></a></li>
+                  <li><a href="app.html#"><i class="ti-tumblr-alt "></i></a></li>
+                  <li><a href="app.html#"><i class="ti-google "></i></a></li>
+                </ul>
+              </div>
+
+              <div class="vertical-result">
+                <div id="subscribe-result" class="vertical-result fixed col-sm-10 align-bottom">
+                </div>
+              </div>
+            </div>
+        </div>
+
+
+        <div id="rightSide" class="visible img-only">
+          <div class="background-img-holder">
+            <img src="img/i2.jpg" alt="This is my work">
+          </div>
+        </div>
+      </section>
+
+
+      <div class="fullscreen-loading">
+        <div id="outPopUp">
+          <div class="sk-folding-cube">
+            <div class="sk-cube1 sk-cube"></div>
+            <div class="sk-cube2 sk-cube"></div>
+            <div class="sk-cube4 sk-cube"></div>
+            <div class="sk-cube3 sk-cube"></div>
+          </div>
+          <p>Sending your message</p>
+        </div>
+      </div>
+
+      <script src="js/jquery-1.11.3.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script src="js/animsition.min.js"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+      <script src="js/jquery.countdown.min.js"></script>
+      <script src="js/photoswipe.min.js"></script>
+      <script src="js/photoswipe-ui-default.min.js"></script>
+      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="js/script.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+      <script src="js/bit.js"></script>
+
+      <script>
+        
+            function sendMessage() {
+                  var email = document.getElementById("email").value;
+        
+                  if(validateEmail(email)){
+                      $('.fullscreen-loading').fadeIn(100);
+                      disableScroll();
+                    // alert(name + "\n" +  email + "\n" + subj + "\n" + msg + "\n" + num);
+                      emailjs.send("mailjet", "scanplan", {"email":email})
+                      .then(function(response) {
+                        //  alert("Message sent successfully!");
+                         document.getElementById("email").value = "";
+                        //  $('#successModal').modal('show');
+                           $('.fullscreen-loading').fadeOut(100);
+                           toastr.success("Message sent, we will be in contact :)", {timeOut: 2000});
+                          enableScroll();
+                      }, function(err) {
+                         console.log(err);
+                           $('.fullscreen-loading').fadeOut(100);
+                           toastr.error(err, {timeOut: 2000});
+                          //  $('#errorModal2').modal('show');
+                          enableScroll();
+                      });
+                  } else {
+                    toastr.warning("Please enter a valid email adddress", {timeOut: 2000});
+                    enableScroll();
+                  }
+            }
+            </script>
+  </body>
+</html>
